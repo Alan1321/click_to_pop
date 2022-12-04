@@ -20,7 +20,7 @@ function scene:create( event )
 
    local name = display.newText( "Alan Subedi", display.contentWidth/2, display.contentHeight/2 - 100, native.systemFont, 64 )
    name:setFillColor( 1, 1, 1 )
-   sceneGroup:insert(name)
+   group:insert(name)
 
     local function clickHandler(event)
         composer.gotoScene("scene2", {
@@ -40,12 +40,12 @@ function scene:create( event )
    nextScene:setFillColor( 1,1,1 )
    nextScene:setStrokeColor( 1, 1, 1 ) 
    nextScene:addEventListener('tap', clickHandler) 
-   sceneGroup:insert(nextScene)
+   group:insert(nextScene)
 
    local nextPageLabel = display.newText( "Click Me!!", display.contentWidth/2, display.contentHeight/2, native.systemFontBold, 32 )
    nextPageLabel:setFillColor( 0, 0, 0 )
    nextPageLabel:addEventListener('tap', clickHandler)
-   sceneGroup:insert(nextPageLabel)
+   group:insert(nextPageLabel)
 
 end
  
@@ -76,6 +76,7 @@ function scene:hide( event )
       -- Example: stop timers, stop animation, stop audio, etc.
    elseif ( phase == "did" ) then
       -- Called immediately after scene goes off screen.
+      display.remove(group)
    end
 end
  
@@ -83,7 +84,6 @@ end
 function scene:destroy( event )
  
    local sceneGroup = self.view
- 
    -- Called prior to the removal of scene's view ("sceneGroup").
    -- Insert code here to clean up the scene.
    -- Example: remove display objects, save state, etc.

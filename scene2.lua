@@ -1,7 +1,11 @@
 --Alan Subedi
 local composer = require( "composer" )
 local scene = composer.newScene()
- 
+local physics = require("physics")
+local circle = require("circle")
+local rectangle = require("rectangle")
+local triangle = require("triangle")
+local Enemy = require("shapes")
 ---------------------------------------------------------------------------------
 -- All code outside of the listener functions will only be executed ONCE
 -- unless "composer.removeScene()" is called.
@@ -11,14 +15,60 @@ local scene = composer.newScene()
  
 ---------------------------------------------------------------------------------
 
+local group = display.newGroup()
+
 -- "scene:create()"
 function scene:create( event )
  
-   local sceneGroup = self.view
+    local sceneGroup = self.view
+    physics.start()
 
-   local name = display.newText( "Scene 2", display.contentWidth/2, display.contentHeight/2 - 300, native.systemFont, 64 )
-   name:setFillColor( 1, 1, 1 )
-   sceneGroup:insert(name)
+    local name = display.newText( "Scene 2", display.contentWidth/2, display.contentHeight/2 - 500, native.systemFont, 32 )
+    name:setFillColor( 1, 1, 1 )
+    sceneGroup:insert(name)
+
+    local leftWall = display.newRect( 5, display.contentHeight / 2, 10, display.contentHeight )
+    leftWall.strokeWidth = 2
+    leftWall:setFillColor( 1,1,1 )
+    leftWall:setStrokeColor( 1, 1, 1 ) 
+    physics.addBody( leftWall, "static")
+    sceneGroup:insert(leftWall)
+
+    local rightWall = display.newRect( display.contentWidth - 5, display.contentHeight / 2, 10, display.contentHeight )
+    rightWall.strokeWidth = 2
+    rightWall:setFillColor( 1,1,1 )
+    rightWall:setStrokeColor( 1, 1, 1 ) 
+    physics.addBody( rightWall, "static")
+    sceneGroup:insert(rightWall)
+
+    local bottomWall = display.newRect( display.contentWidth / 2, display.contentHeight - 5, display.contentWidth, 10 )
+    bottomWall.strokeWidth = 2
+    bottomWall:setFillColor( 1,1,1 )
+    bottomWall:setStrokeColor( 1, 1, 1 ) 
+    physics.addBody( bottomWall, "static")
+    sceneGroup:insert(bottomWall)
+
+    
+    function fall()
+        local xPos = 60 + math.random (360);
+        local yPos = -20
+        
+        if (math.random() <= 0.333) then
+            local c = circle:new();
+            c:spawn();
+            c.shape:addEventListener("touch", c);
+        elseif (math.random() > 0.333 and math.random() <= 0.666) then
+            local r = rectangle:new();
+            r:spawn();
+            r.shape:addEventListener("touch", r);
+        
+        elseif (math.random() > 0.666) then
+            local t = triangle:new();
+            t:spawn();
+            t.shape:addEventListener("touch", t);
+        
+        end  
+    end
 
 end
  
@@ -34,6 +84,7 @@ function scene:show( event )
       -- Called when the scene is now on screen.
       -- Insert code here to make the scene come alive.
       -- Example: start timers, begin animation, play audio, etc.
+      local dropShape = timer.performWithDelay(300, fall, 0)
    end
 end
  
