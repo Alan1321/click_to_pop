@@ -1,5 +1,6 @@
+--Alan Subedi
 local shapes = require ("shapes");
-
+shootSound = audio.loadSound( "shoot.wav" )
 local rectangle = shapes:new();
 local size = 2
 
@@ -12,6 +13,7 @@ end
 function rectangle:touch()
     self.shape.strokeWidth = 5
     self.shape:setStrokeColor(1,1,1)
+    audio.play( shootSound )
 end
 
 return rectangle

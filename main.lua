@@ -1,5 +1,4 @@
 --Alan Subedi
-
 ------------------------------------------
 widget = require( "widget" )
 local composer = require("composer")

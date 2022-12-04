@@ -6,6 +6,7 @@ local circle = require("circle")
 local rectangle = require("rectangle")
 local triangle = require("triangle")
 local Enemy = require("shapes")
+local file = require("file")
 ---------------------------------------------------------------------------------
 -- All code outside of the listener functions will only be executed ONCE
 -- unless "composer.removeScene()" is called.
@@ -22,6 +23,9 @@ function scene:create( event )
  
     local sceneGroup = self.view
     physics.start()
+    file.set_count("circle",0)
+    file.set_count("rectangle",0)
+    file.set_count("triangle",0)
 
     local name = display.newText( "Scene 2", display.contentWidth/2, display.contentHeight/2 - 500, native.systemFont, 32 )
     name:setFillColor( 1, 1, 1 )
@@ -54,19 +58,23 @@ function scene:create( event )
         local yPos = -20
         
         if (math.random() <= 0.333) then
+            local count = file.get_count("circle")
+            file.set_count("circle",count+1)
             local c = circle:new();
             c:spawn();
             c.shape:addEventListener("touch", c);
         elseif (math.random() > 0.333 and math.random() <= 0.666) then
+            local count = file.get_count("rectangle")
+            file.set_count("rectangle",count+1)
             local r = rectangle:new();
             r:spawn();
             r.shape:addEventListener("touch", r);
-        
         elseif (math.random() > 0.666) then
+            local count = file.get_count("triangle")
+            file.set_count("triangle",count+1)
             local t = triangle:new();
             t:spawn();
             t.shape:addEventListener("touch", t);
-        
         end  
     end
 

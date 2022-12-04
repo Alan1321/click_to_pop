@@ -1,3 +1,6 @@
+--Alan Subedi
+shootSound = audio.loadSound( "shoot.wav" )
+
 local shapes = {yPos = -50};
 local size = 2
 
@@ -14,9 +17,9 @@ function shapes:spawn()
     physics.addBody(self.shape, "dynamic"); 
 end
 
-
 function shapes:touch()
     self:delete()
+    self:sound()
     return true
 end
 
@@ -26,6 +29,8 @@ function shapes:delete(shape)
 end
 
 function shapes:sound()
+    print("im in shapes.lua/sound")
+    audio.play( shootSound )
 end
 
 

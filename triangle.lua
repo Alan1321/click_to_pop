@@ -1,5 +1,6 @@
+--Alan Subedi
 local shapes = require ("shapes");
-
+shootSound = audio.loadSound( "shoot.wav" )
 local triangle = shapes:new();
 local size = 2
 
@@ -11,16 +12,11 @@ function triangle:spawn()
 end
 
 function triangle:touch(event)
-    -- print(event.x, event.y)
-    --print(self.shape.x, self.shape.y)
     if event.phase == "began" then
-        print("began")
     elseif event.phase == "moved" then
-        print("moved")
         self.shape.x = event.x
         self.shape.y = event.y
     elseif event.phase == "ended" then
-        print("ended")
     end
     return true
 end
