@@ -1,11 +1,11 @@
 --Alan Subedi
-local shapes = require ("shapes");
+local circle = require ("circle");
 shootSound = audio.loadSound( "shoot.wav" )
-local rectangle = shapes:new();
+local rectangle = circle:new();
 local size = 2
 
 function rectangle:spawn()
-    self.shape = display.newRect (math.random(10, display.contentWidth - 10), self.yPos, size*30, size*30);
+    self.shape = display.newRect (math.random(30, 600), -50, size*30, size*30);
     self.shape:setFillColor (math.random(),math.random(),math.random());
     physics.addBody(self.shape, "dynamic");  
 end

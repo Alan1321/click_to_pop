@@ -12,9 +12,13 @@ function shapes:new (o)    --constructor
 end
 
 function shapes:spawn()
-    self.shape=display.newCircle(math.random(10, display.contentWidth - 10), self.yPos,size * 30);
+    self.shape=display.newCircle(math.random(30, 600), -50,size * 30);
     self.shape:setFillColor (math.random(),math.random(),math.random());
     physics.addBody(self.shape, "dynamic"); 
+end
+
+function shapes:returnShape()
+    return self.shape
 end
 
 function shapes:touch()
@@ -29,7 +33,6 @@ function shapes:delete(shape)
 end
 
 function shapes:sound()
-    print("im in shapes.lua/sound")
     audio.play( shootSound )
 end
 

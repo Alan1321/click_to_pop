@@ -6,7 +6,7 @@ local size = 2
 
 function triangle:spawn()
     local vertices = {size*0,size*0,size*25,size*-50,size*50,size*0}
-    self.shape = display.newPolygon (math.random(10, display.contentWidth - 10), self.yPos, vertices);
+    self.shape = display.newPolygon (math.random(30, 600), -50, vertices);
     self.shape:setFillColor (math.random(),math.random(),math.random());
     physics.addBody(self.shape, "dynamic");  
 end

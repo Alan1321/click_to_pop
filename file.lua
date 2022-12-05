@@ -27,6 +27,12 @@ function write(file_name, t)
     local file, errorString = io.open(path, "w")
     file:write( json.encode( t ) )
     io.close(file)
+
+    local defaultLocation = system.DocumentsDirectory
+    local path = system.pathForFile(file_name, defaultLocation)
+    local file, errorString = io.open(path, "w")
+    file:write( json.encode( t ) )
+    io.close(file)
 end
 
 --gets a table and prints it
